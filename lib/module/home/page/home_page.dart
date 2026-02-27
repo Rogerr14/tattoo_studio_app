@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
             bottom: Radius.circular(20)
           )
         ),
+        centerTitle: true,
         title: TitleTextWidget(title: 'Dennise´s Piercing '),
         leading: IconButton(onPressed: (){
 
