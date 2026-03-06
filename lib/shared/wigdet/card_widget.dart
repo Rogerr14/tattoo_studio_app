@@ -45,7 +45,8 @@ class _CardWidgetState extends State<CardWidget> {
                       child: TitleTextWidget(
                         title: widget.cardTitle,
                         colorTitle: AppTheme.white,
-                        fontSize: responsive.dp(2),
+                        fontSize: responsive.dp(2.5),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),

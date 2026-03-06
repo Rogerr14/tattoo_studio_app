@@ -6,8 +6,8 @@ class TitleTextWidget extends StatelessWidget {
   Color colorTitle;
   double fontSize;
   TextDecoration? textDecoration;
-
-   TitleTextWidget({super.key, required this.title, this.colorTitle = Colors.blueAccent,  this.fontSize = 16, this.textDecoration});
+  final FontWeight fontWeight;
+   TitleTextWidget({super.key, required this.title, this.colorTitle = Colors.blueAccent,  this.fontSize = 16, this.textDecoration,  this.fontWeight =FontWeight.normal});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class TitleTextWidget extends StatelessWidget {
       style: TextStyle(
         color: colorTitle,
         fontSize: fontSize,
-        decoration: textDecoration
-
+        decoration: textDecoration,
+        fontWeight: fontWeight
       ),
     );
   }

@@ -35,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SizedBox(
                 height: responsive.height * 0.3,
-                child: Center(child: TitleTextWidget(title: 'Logo',colorTitle: AppTheme.white,))),
+                width: responsive.width * 0.5,
+                child: Center(child: Image.asset(AppTheme.logo))),
               
               Container(
                 height: responsive.height * 0.7,

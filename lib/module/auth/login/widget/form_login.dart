@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatto_studio_app/env/theme/app_theme.dart';
 import 'package:tatto_studio_app/module/auth/recovery/page/recovery_page.dart';
+import 'package:tatto_studio_app/module/auth/register/page/register_page.dart';
 import 'package:tatto_studio_app/module/home/page/home_page.dart';
 import 'package:tatto_studio_app/shared/helper/responsive.dart';
 import 'package:tatto_studio_app/shared/wigdet/filled_button_widget.dart';
@@ -22,7 +23,7 @@ class _FormLoginState extends State<FormLogin> {
 
 
   void _login()async{
-    if(_userController.text == "rruiz@viamatica.com" && _passwordController.text == '1234'){
+    if(_userController.text == "hugo@hu.com" && _passwordController.text == '1234'){
         Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),));
     }
   }
@@ -87,8 +88,14 @@ class _FormLoginState extends State<FormLogin> {
             onPressed: _login,
             text: 'Iniciar sesión',
           ),
+          const SizedBox(height: 10,),
+          InkWell(
+            onTap: (){
+              Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => RegisterPage(),));
+            },
+            child: TitleTextWidget(title: 'No tengo cuenta aún', colorTitle: AppTheme.black, textDecoration: TextDecoration.underline,)),
           SizedBox(
-            height: responsive.height * 0.2,
+            height: responsive.height * 0.15,
           ),
           TitleTextWidget(
             title: 'Powered by HU',
