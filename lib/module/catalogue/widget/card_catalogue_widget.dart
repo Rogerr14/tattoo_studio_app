@@ -100,7 +100,9 @@ class _CardCatalogueWidgetState extends State<CardCatalogueWidget> {
                 ),
               ),).toList() ,),
               const SizedBox(height: 25,),
-              FilledButtonWidget(onPressed: (){}, text: 'Agendar sesión',)
+              FilledButtonWidget(onPressed: (){
+                
+              }, text: 'Agendar sesión',)
             ],
           ),
         ),

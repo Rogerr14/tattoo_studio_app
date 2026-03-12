@@ -4,6 +4,7 @@ import 'package:tatto_studio_app/module/auth/recovery/page/recovery_page.dart';
 import 'package:tatto_studio_app/module/auth/register/page/register_page.dart';
 import 'package:tatto_studio_app/module/home/page/home_page.dart';
 import 'package:tatto_studio_app/shared/helper/responsive.dart';
+import 'package:tatto_studio_app/shared/helper/secure_storage.dart';
 import 'package:tatto_studio_app/shared/wigdet/filled_button_widget.dart';
 import 'package:tatto_studio_app/shared/wigdet/text_form_field_widget.dart';
 import 'package:tatto_studio_app/shared/wigdet/title_text_widget.dart';
@@ -23,8 +24,48 @@ class _FormLoginState extends State<FormLogin> {
 
 
   void _login()async{
-    if(_userController.text == "hugo@hu.com" && _passwordController.text == '1234'){
-        Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),));
+    final userData =  await SecureStorage().getUserData();
+
+    if(userData != null){
+
+      if(_userController.text == userData.user && _passwordController.text == userData.password){
+        Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => HomePage(),));
+      }else{
+         ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Row(
+          children: [
+            Icon(Icons.error, color: Colors.white),
+            SizedBox(width: 5),
+            Text('El correo y/o la constraseña son incorrectas'),
+          ],
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+      }
+
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Row(
+          children: [
+            Icon(Icons.error, color: Colors.white),
+            SizedBox(width: 12),
+            Text('La cuenta ingresada no existe'),
+          ],
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 2),
+      ),
+    );
     }
   }
 
@@ -68,22 +109,22 @@ class _FormLoginState extends State<FormLogin> {
           SizedBox(
             height: responsive.height * 0.02,
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const RecoveryPage(),));
-              },
-              child: TitleTextWidget(
-                title: 'Olvidé mi contraseña',
-                colorTitle: AppTheme.black,
-                textDecoration: TextDecoration.underline,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: responsive.height * 0.05,
-          ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: InkWell(
+          //     onTap: () {
+          //       Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const RecoveryPage(),));
+          //     },
+          //     child: TitleTextWidget(
+          //       title: '',
+          //       colorTitle: AppTheme.black,
+          //       textDecoration: TextDecoration.underline,
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: responsive.height * 0.05,
+          // ),
           FilledButtonWidget(
             onPressed: _login,
             text: 'Iniciar sesión',
